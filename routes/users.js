@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const bcrypt = require('bcrypt')
 
 const {AuthenticationMiddleWare,CheckIfUserExists} =require('../auth/authentication');
 const {AuthorizationMiddleWare} =require('../auth/authorization');
@@ -17,11 +18,15 @@ router.post('/login',CheckIfUserExists,AuthenticationMiddleWare);
 
 router.post('/register',async (req,res,next)=>{
     const {userId,name,status,password} =req.body
+    const hashed = await bcrypt.hashSync(password,10)
 
     await new UserModel({
-      userId,name,status,password
-    }).save((err,product)=>{
-        res.json(product)
+      userId,name,status,password:hashed
+    }).save((err,User)=>{
+
+        if(err) throw err;
+
+        res.json(User)
     })
 })
 
