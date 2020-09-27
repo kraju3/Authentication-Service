@@ -23,16 +23,25 @@ module.exports={
 
         const {LoginId,Pw}=req.body
 
-        const User = await UserModel.findOne({userId:LoginId})
+        await UserModel.findOne({userId:LoginId},(err,user)=>{
+            if(err) throw err
 
-        const IsUser = await bcrypt.compareSync(Pw,User.password)
+            if(!user){
+                res.status(401).json({"Authorization":"Failed!User does not exist"})
+            }
+
+            const IsUser = await bcrypt.compareSync(Pw,user.password)
+
+            if(IsUser){
+                res.locals.User=user
+                next()
+            }else{
+                res.status(404).send('Credentiials are wrong')
+            }
+    
+
+
+        })
         
-        if(IsUser){
-            res.locals.User=User
-            next()
-        }else{
-            res.status(404).send('User does not exist')
-        }
-
     },
 }
