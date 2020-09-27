@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt')
 
-const {AuthenticationMiddleWare,CheckIfUserExists} =require('../auth/authentication');
-const {AuthorizationMiddleWare} =require('../auth/authorization');
-const {app} = require('../app');
+const {AuthenticationMiddleWare,CheckIfUserExists} =require('../controllers/auth/authentication');
+const {AuthorizationMiddleWare,checkRole} =require('../controllers/auth/authorization');
+
+const {GiveAllUsers} = require('../controllers/users/usercontroller')
 const UserModel = require('../entities/models/User');
 
 /* GET users listing. */
@@ -30,15 +31,16 @@ router.post('/register',async (req,res,next)=>{
     })
 })
 
-
 /** Add Authorization and Define all thee routes after Authentication */
 
-router.use(AuthorizationMiddleWare)
 
 
 router.get('/home',(req,res,next)=>{
   res.send("Home page now")
 })
+
+
+router.get('/users',AuthorizationMiddleWare,checkRole,GiveAllUsers); 
 
 
 

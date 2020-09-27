@@ -1,6 +1,6 @@
-const UserModel = require('../entities/models/User')
+const UserModel = require('../../entities/models/User')
 const jwt = require('jsonwebtoken')
-const app = require('../app')
+const app = require('../../app')
 const bcrypt = require('bcrypt')
 
 
@@ -23,7 +23,7 @@ module.exports={
 
         const {LoginId,Pw}=req.body
 
-        await UserModel.findOne({userId:LoginId},(err,user)=>{
+        await UserModel.findOne({userId:LoginId},async (err,user)=>{
             if(err) throw err
 
             if(!user){
