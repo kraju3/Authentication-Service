@@ -21,7 +21,7 @@ module.exports={
             res.status(404).send('Not Authorized')
         }
     },
-    checkRole: async (req,res,next)=>{
+    checkAdminRole: async (req,res,next)=>{
         let role = res.locals.role
         if(role.status.role!=='admin'){
             res.locals.role=undefined

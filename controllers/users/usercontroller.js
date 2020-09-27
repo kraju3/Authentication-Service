@@ -5,6 +5,14 @@ module.exports={
         const Users = await UserModel.find()
         console.log(Users)
         res.send(JSON.stringify(Users))
-        next()
+///next()
+    },
+    GetUserById:async(req,res,next)=>{
+        const {id} = req.params
+    
+        const User = await UserModel.findOne({userId:id})
+
+        res.send({User})
+
     }
 }
