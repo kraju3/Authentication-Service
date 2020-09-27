@@ -1,6 +1,7 @@
 const UserModel = require('../entities/models/User')
 const jwt = require('jsonwebtoken')
 const app = require('../app')
+const bcrypt = require('bcrypt')
 
 
 module.exports={
@@ -22,9 +23,11 @@ module.exports={
 
         const {LoginId,Pw}=req.body
 
-        const User = await UserModel.findOne({userId:LoginId,password:Pw})
+        const User = await UserModel.findOne({userId:LoginId})
+
+        const IsUser = await bcrypt.compareSync(Pw,User.password)
         
-        if(User){
+        if(IsUser){
             res.locals.User=User
             next()
         }else{
