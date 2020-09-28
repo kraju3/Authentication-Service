@@ -20,7 +20,7 @@ router.post('/login',CheckIfUserExists,AuthenticationMiddleWare);
 
 router.post('/register',async (req,res,next)=>{
     const {userId,name,status,password} =req.body
-    const hashed = await bcrypt.hashSync(password,10)
+    const hashed = await bcrypt.hash(password,10)
 
     await new UserModel({
       userId,name,status,password:hashed

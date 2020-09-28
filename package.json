@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "test": "mocha ./test/authTest.js",
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "axios": "^0.20.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
@@ -18,5 +20,10 @@
     "mongoose": "^5.10.7",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.1.3",
+    "mongodb-memory-server": "^6.8.0"
   }
 }

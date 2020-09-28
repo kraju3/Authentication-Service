@@ -4,7 +4,7 @@ module.exports={
     GiveAllUsers:async(req,res,next)=>{
         const Users = await UserModel.find()
         console.log(Users)
-        res.send(JSON.stringify(Users))
+        res.json(Users)
 ///next()
     },
     GetUserById:async(req,res,next)=>{
@@ -12,7 +12,7 @@ module.exports={
     
         const User = await UserModel.findOne({userId:id})
 
-        res.send({User})
+        res.json(User)
 
     }
 }

@@ -30,7 +30,7 @@ module.exports={
                 res.status(401).json({"Authorization":"Failed!User does not exist"})
             }
 
-            const IsUser = await bcrypt.compareSync(Pw,user.password)
+            const IsUser = await bcrypt.compare(Pw,user.password)
 
             if(IsUser){
                 res.locals.User=user
