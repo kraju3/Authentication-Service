@@ -1,0 +1,32 @@
+name: code quality
+
+on: [pull_request]
+
+jobs:
+
+  coverage:
+    name: API endpoint Unit Testing
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [12.x]
+            mongodb-version: [4.2]
+
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.3.0
+      with:
+        mongodb-version: 4.2
+
+    - run: npm install
+    - run: npm run test
+      env:
+        CI: true
+        APP_JWT_SECRET: ${{secrets.JWT_SECRET}}
+

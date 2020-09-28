@@ -9,7 +9,7 @@ require('dotenv').config()
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const {AuthorizationMiddleware} = require('./auth/authorization')
+const {AuthorizationMiddleware} = require('./controllers/auth/authorization')
 
 const app = express();
 
