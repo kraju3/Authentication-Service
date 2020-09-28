@@ -119,6 +119,8 @@ describe('Access Right', ()=>{
     
         const response = await client.post('/users/login',loginCreds)
 
+        console.log(response)
+
         assert.equal(response.status,200)
         assert.exists(response.data.token)
 
@@ -148,6 +150,8 @@ describe('Access Right', ()=>{
                 "Authorization":token
             }
         })
+
+        console.log(response)
 
         assert.equal(response_.status,200)
 
