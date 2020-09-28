@@ -15,18 +15,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 12.x
     - name: Use Node.js ${{ matrix.node-version }}
-    - uses: actions/setup-node@v1
-        with:
-            node-version: ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
     - name: Start MongoDB
-    - uses: supercharge/mongodb-github-action@1.3.0
-         with:
-            mongodb-version: ${{ matrix.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.3.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
 
     - run: npm install
-
-    - run: npm test
-        env:
+    - run: npm run test
+      env:
         CI: true
+        MONGODB_HOST: ${{secrets.MONGODB_HOST}}
+        MONGODB_PORT: ${{ job.services.mongodb.ports[27017] }} 
