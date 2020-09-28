@@ -56,7 +56,16 @@ before(async()=>{
         useUnifiedTopology:true
     };
 
-    await mongoose.connect(uri, mongooseOpts,(err)=>{if(err) throw err})
+    await mongoose.connect(uri, mongooseOpts,(err)=>{
+        
+        
+        if(err) throw err
+
+        console.log("Connected to DB")
+    
+    
+    
+    })
 
 })
 
