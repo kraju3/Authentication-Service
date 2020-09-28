@@ -49,7 +49,7 @@ before(async()=>{
     server = app.listen(4000)
 
 
-    const uri = `mongodb://${process.env.MONGODB_HOST}:${process.env.MONGODB_PORT}/AuthServiceTest`
+    const uri = `mongodb://localhost:27017/AuthServiceTest`
 
     const mongooseOpts = {
         useNewUrlParser: true,
