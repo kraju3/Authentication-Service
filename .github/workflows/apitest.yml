@@ -28,4 +28,5 @@ jobs:
     - run: npm run test
       env:
         CI: true
+        APP_JWT_SECRET: ${{secrets.JWT_SECRET}}
 
