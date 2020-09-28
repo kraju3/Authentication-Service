@@ -46,7 +46,9 @@ const [admin,user] =[
 
 before(async()=>{
 
-    server = app.listen(4000)
+    server = app.listen(4000,()=>{
+        console.log("Server listening on port 4000")
+    })
 
 
     const uri = `mongodb://localhost:27017/AuthServiceTest`
@@ -76,7 +78,7 @@ after(async ()=>{
         await mongoose.connection.close()
         await mongoose.disconnect();
         await server.close();
-    },2000)
+    },1000)
 });
 
 
